@@ -11,10 +11,15 @@ AppWindow::AppWindow () :
 	BWindow (BRect (100, 100, 500, 500),
 			 "SamLib Helper",
 			 B_TITLED_WINDOW,
-			 B_NOT_ZOOMABLE | B_NOT_RESIZABLE | B_ASYNCHRONOUS_CONTROLS)
+			 B_NOT_ZOOMABLE | B_ASYNCHRONOUS_CONTROLS)
 {
+	BGroupLayout* group = new BGroupLayout(B_VERTICAL);
+	group->SetInsets(0, 0, 0, 0);
+	this->SetLayout(group);
 	mainView = new MainView (Bounds());
-	AddChild (mainView);
+	BLayoutItem* mainViewItem = group->AddView (mainView);
+	mainViewItem->SetExplicitAlignment(BAlignment(B_ALIGN_USE_FULL_WIDTH,
+												  B_ALIGN_USE_FULL_HEIGHT));
 }
 
 

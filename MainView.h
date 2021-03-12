@@ -6,8 +6,10 @@
 #define MAIN_VIEW_H
 
 #include <View.h>
-
+#include <LayoutBuilder.h>
 #include <SupportDefs.h>
+
+#include "SourceView.h"
 
 
 class MainView :
@@ -19,7 +21,8 @@ public:
 	
 	void AttachedToWindow();
 private:
-
+	SourceTextView* sourceView;
+	BScrollView*	scrollView;
 };
 
 

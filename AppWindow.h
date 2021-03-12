@@ -5,6 +5,7 @@
 #ifndef APP_WINDOW_H
 #define APP_WINODW_H
 
+#include <LayoutBuilder.h>
 #include <View.h>
 #include <Rect.h>
 #include <Window.h>
