@@ -27,21 +27,5 @@ class SourceTextView : public BTextView
 		bool AcceptsPaste(BClipboard *clipboard);
 };
 
-/*!	\class		SourceView	SourceView.h
- *	\brief		SourceTextView with scrollbars.
- */
-class SourceView : public BScrollView
-{
-public:
-	SourceView(BRect frame,
-			   const char* name);
-	~SourceView();
-	
-	void RemoveSelf() { BScrollView::RemoveSelf(); }
-protected:
-	SourceTextView		*textView;
-	BScrollView 		*scrollBars;
-};
-
 
 #endif // SOURCE_VIEW_H
