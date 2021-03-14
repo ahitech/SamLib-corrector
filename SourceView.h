@@ -1,4 +1,5 @@
-/*
+/*!	\file	SourceView.h
+ *	\brief	Declaration of the SourceTextView class
  * Copyright 2020, Alex Hitech <ahitech@gmail.com>
  * All rights reserved. Distributed under the terms of the MIT license.
  */
@@ -9,6 +10,7 @@
 
 #include <Rect.h>
 #include <ScrollView.h>
+#include <String.h>
 #include <TextView.h>
 
 /*!	\class		SourceTextView	SourceView.h
@@ -23,8 +25,13 @@ class SourceTextView : public BTextView
 		virtual ~SourceTextView() {};
 
 		// This BTextView accepts HTML
-		bool AcceptsDrop (BMessage *archive);
-		bool AcceptsPaste(BClipboard *clipboard);
+		virtual bool AcceptsDrop (BMessage *archive);
+		virtual bool AcceptsPaste(BClipboard *clipboard);
+		
+		virtual void Paste(BClipboard* clipboard);
+		virtual void MessageReceived(BMessage* in);
+	protected:
+		int DoesMessageHaveMIMEtype(BMessage* , BString);
 };
 
 
