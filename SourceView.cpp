@@ -39,16 +39,16 @@ SourceTextView::SourceTextView (BRect rect,
 bool SourceTextView::AcceptsDrop(BMessage *data)
 {
 	bool toReturn;
-	BString mimeTypes[] = {"text/html", "text/plain"};
+	BString htmlType("text/html");
 	
 	int countFound, i = 0;
-	do {
-			// Perform the check
-		countFound = DoesMessageHaveMIMEtype(data, mimeTypes[i]);
-		if (countFound > 0) {
-			toReturn = true;		// There is something supported
-		}
-	} while ((!toReturn) && (i < 2));	// First supported item is good enough
+		// Perform the check
+	countFound = DoesMessageHaveMIMEtype(data, htmlType);
+	if (countFound > 0) {
+		toReturn = true;		// There is something supported
+	} else {
+		BTextView::AcceptsDrop(data);	// Otherwise we check with the base function
+	}
 	return toReturn;
 }
 
@@ -94,6 +94,44 @@ int	SourceTextView::DoesMessageHaveMIMEtype(BMessage *data,
 		}
 	}
 	return toReturn;
+}
+
+
+
+/**	\brief	This function is called when "Paste" is clicked in the window.
+ *	\param[in]	clipboard	The clipboard to paste from.
+ */
+void SourceTextView::Paste(BClipboard* clipboard)
+{
+	clipboard->Lock();
+	BMessage* data = clipboard->Data();
+	BString htmlType("text/html");
+	clipboard->Unlock();
+	if (data &&
+		DoesMessageHaveMIMEtype(data, htmlType))
+	{	// There is some HTML inside that we should read
+		char text[1024];
+		ssize_t	textLen;
+		if (B_OK == data->FindData(htmlType.String(), B_MIME_TYPE, (const void**)text, &textLen))
+		{	// Successfully got the data
+			BString textString(text);
+			int32 start, finish;
+			GetSelection(&start, &finish);
+			DeleteText(start, finish);
+			InsertText(textString.String(), (int32)textLen, start, NULL);
+		}
+	}
+	else
+	{
+		BTextView::Paste(clipboard);		// Calling the base class implementation to paste 
+	}
+}
+
+
+
+void SourceTextView::MessageReceived(BMessage* in)
+{
+	BTextView::MessageReceived(in);	
 }
 
 /*		scrollBars = new BScrollView("scroller",
