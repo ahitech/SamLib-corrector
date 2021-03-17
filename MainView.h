@@ -22,7 +22,10 @@ public:
 	void AttachedToWindow();
 private:
 	SourceTextView* sourceView;
-	BScrollView*	scrollView;
+	BScrollView*	sourceScrollView;
+	
+	SourceTextView*	targetView;
+	BScrollView*	targetScrollView;
 };
 
 

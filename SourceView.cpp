@@ -10,16 +10,18 @@
 
 
 /*!	\brief		Constructor
- *	\param[in]	rect	The frame of the text box
- *	\param[in]	name	The name of the BView
+ *	\param[in]	rect		The frame of the view (in parent's coordinates)
+ *	\param[in]	textRect	The frame of the text box (in this view's coordinates)
+ *	\param[in]	name		The name of the BView
  *	\details	Sets the color of the text to `B_DOCUMENT_TEXT_COLOR` and the
  *				font to `be_fixed_font`.
  */
 SourceTextView::SourceTextView (BRect rect,
+								BRect textRect,
 								const char *name)
 	: BTextView(rect,
 				name,
-				rect.InsetBySelf(5,5),
+				textRect,
 				B_FOLLOW_ALL_SIDES,
 				B_WILL_DRAW | B_FULL_UPDATE_ON_RESIZE | B_NAVIGABLE)
 {

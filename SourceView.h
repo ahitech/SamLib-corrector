@@ -21,7 +21,7 @@
 class SourceTextView : public BTextView 
 {
 	public:
-		SourceTextView(BRect frame, const char *name);
+		SourceTextView(BRect frame, BRect textRect, const char *name);
 		virtual ~SourceTextView() {};
 
 		// This BTextView accepts HTML

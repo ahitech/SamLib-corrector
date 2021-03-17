@@ -8,7 +8,7 @@
 #include "Application.h"
 
 AppWindow::AppWindow () :
-	BWindow (BRect (100, 100, 500, 500),
+	BWindow (BRect (100, 100, 500, 800),
 			 "SamLib Helper",
 			 B_TITLED_WINDOW,
 			 B_NOT_ZOOMABLE | B_ASYNCHRONOUS_CONTROLS)
