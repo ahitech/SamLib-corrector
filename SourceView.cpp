@@ -4,6 +4,7 @@
  * All rights reserved. Distributed under the terms of the MIT license.
  */
 #include <Clipboard.h>
+#include <File.h>
 
 #include "SourceView.h"
 
@@ -37,7 +38,7 @@ SourceTextView::SourceTextView (BRect rect,
  *	\param[in]	data	The message to be checked
  *	\returns	`true`	If a data of supported format is found<BR>
  *				`false`	Otherwise
- *
+ */
 bool SourceTextView::AcceptsDrop(BMessage *data)
 {
 	bool toReturn;
@@ -61,7 +62,7 @@ bool SourceTextView::AcceptsDrop(BMessage *data)
  *	\returns	`true`	If the data type is supported<BR>
  *				`false`	Otherwise
  *	\details	Calls the SourceTextView#AcceptsDrop() function.
- *
+ */
 bool SourceTextView::AcceptsPaste(BClipboard *clipboard)
 {
 	BMessage*	data(NULL);
@@ -78,7 +79,7 @@ bool SourceTextView::AcceptsPaste(BClipboard *clipboard)
 
 /**	\brief	This function is called when "Paste" is clicked in the window.
  *	\param[in]	clipboard	The clipboard to paste from.
- *
+ */
 void SourceTextView::Paste(BClipboard* clipboard)
 {
 	clipboard->Lock();
@@ -88,7 +89,7 @@ void SourceTextView::Paste(BClipboard* clipboard)
 	if (data &&
 		data->HasData(htmlType.String(), B_MIME_TYPE))
 	{	// There is some HTML inside that we should read
-		char* text;
+/*		char* text;
 		ssize_t	textLen;
 		if (B_OK == data->FindData(htmlType.String(), B_MIME_TYPE, (const void**)text, &textLen))
 		{	// Successfully got the data
@@ -97,7 +98,12 @@ void SourceTextView::Paste(BClipboard* clipboard)
 			GetSelection(&start, &finish);
 			DeleteText(start, finish);
 			InsertText(textString.String(), (int32)textLen, start, NULL);
-		}
+*/
+			BFile *writeTo = new BFile("./message.log", B_WRITE_ONLY | B_CREATE_FILE | B_ERASE_FILE);
+			data->Flatten(writeTo);
+			writeTo->Unset();
+			delete writeTo;
+//		}
 	}
 	else
 	{

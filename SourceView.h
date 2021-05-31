@@ -25,12 +25,12 @@ class SourceTextView : public BTextView
 		virtual ~SourceTextView() {};
 
 		// This BTextView accepts HTML
-/*		virtual bool AcceptsDrop (BMessage *archive);
+		virtual bool AcceptsDrop (BMessage *archive);
 		virtual bool AcceptsPaste(BClipboard *clipboard);
 		
 		virtual void Paste(BClipboard* clipboard);
 		virtual void MessageReceived(BMessage* in);
-*/	protected:
+	protected:
 };
 
 
