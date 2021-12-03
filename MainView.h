@@ -5,6 +5,7 @@
 #ifndef MAIN_VIEW_H
 #define MAIN_VIEW_H
 
+#include <MenuBar.h>
 #include <View.h>
 #include <LayoutBuilder.h>
 #include <SupportDefs.h>
@@ -23,6 +24,8 @@ public:
 private:
 	SourceTextView* sourceView;
 	BScrollView*	sourceScrollView;
+	
+	BMenuBar*		mainMenuBar;
 	
 	SourceTextView*	targetView;
 	BScrollView*	targetScrollView;

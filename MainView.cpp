@@ -18,6 +18,11 @@ MainView::MainView (BRect frame)
 	BGroupLayout* group = new BGroupLayout(B_VERTICAL);
 	group->SetInsets(10, 10, 10, 10);
 	this->SetLayout(group);
+		
+	mainMenuBar = new BMenuBar(frame, "MainMenuBar");
+	BLayoutItem* menuBarLayoutItem = group->AddView (mainMenuBar);
+	menuBarLayoutItem->SetExplicitAlignment(BAlignment(B_ALIGN_USE_FULL_WIDTH,
+												  B_ALIGN_VERTICAL_UNSET));
 	
 	BRect upper = frame.InsetByCopy(10, 10);
 	BRect lower = upper;
